@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hello World DApp</title>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+</head>
+<body class="container">
+  <h1><b>Cast</b> - A New Democracy</h1>
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Candidate</th>
+          <th>Votes</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+  <canvas id="myChart" width="500" height="500" style="display: inline !important;"></canvas>
+  <input type="text" id="candidate" />
+  <a href="#" onclick="voteForCandidate()" class="btn btn-primary">Vote</a>
+
+
+  <div class="row">
+      <div class="col-xs-4">
+        <input type="button" class="btn btn-warning" onclick="onClick()" value="Cast Votes" />
+        <p id="result"></p>
+      </div>
+    </div>
+</body>
+<script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+<script src="./index.js"></script>
+<script src="./our_chart.js"></script>
+<script type="text/javascript">
+   var voters = web3.eth.accounts;
+    var rand;
+    console.log("running");
+    function onClick(){
+      console.log("click");
+      // var iter = 0;
+      // var intervalID = setInterval(function(){
+      //   if(iter >= voters.length){ window.clearInterval(intervalID); }
+      //   rand = candidates[Math.floor(Math.random() * candidates.length)];
+      //   contractInstance.voteForCandidate(rand, {from: voters[iter]})
+      //   iter++;
+      // }, 100);
+        voters.forEach(function(voter){
+            rand = candidates[Math.floor(Math.random() * candidates.length)];
+            contractInstance.voteForCandidate(rand, {from: voter})
+        });
+      // var maxIndex = -1;
+      // var maxValue = -1;
+      // candidates.forEach(function(cand, index){
+      //   if(votes[index] > maxValue) {
+      //     maxValue = votes[index];
+      //     maxIndex = index;
+      //   }
+      // })
+      // var maxCandidate = candidates[maxIndex];
+      // $("#result").html(maxCandidate + " wins!");
+    }
+</script>
+</html>
